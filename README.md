@@ -1,0 +1,2 @@
+# GeneralPowershell
+General powershell scripts.
