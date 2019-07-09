@@ -17,8 +17,18 @@ Function Get-ADGroupMemAttrib {
         Mandatory=$False,
         ValueFromPipeline=$False,
         HelpMessage= "Enter a file prefix, or the default will be ADattrib_")]
-        $File = "ADattrib_"
+        $File = "ADattrib_",
+                
+        [Parameter(Position=3,
+        Mandatory=$False,
+        ValueFromPipeline=$False,
+        HelpMessage= "Select an AD attribute to return. Default is 5")]
+        $extAttrib = "extensionAttribute5"
     )
+
+    If ($extAttrib -notmatch "ExtensionAttribute*"){
+        $extAttrib = "extensionAttribute" + $extAttrib
+    }
 
     [array]$Table = @()
 
@@ -38,7 +48,7 @@ Function Get-ADGroupMemAttrib {
             $Obj = New-Object PSObject
 
             Try{
-                $ADobj = Get-ADObject -Identity $_ -Properties samAccountName, extensionAttribute5 | Select samAccountName, extensionAttribute5 -ErrorAction "Stop"
+                $ADobj = Get-ADObject -Identity $_ -Properties samAccountName, $extAttrib | Select samAccountName, $extAttrib -ErrorAction "Stop"
             }
             Catch{
                 Write-Host "Error Getting AD User" -ForegroundColor "Red"
@@ -47,7 +57,7 @@ Function Get-ADGroupMemAttrib {
             }
 
             Add-Member -InputObject $obj -MemberType NoteProperty -Name User -Value $ADobj.samAccountName
-            Add-Member -InputObject $obj -MemberType NoteProperty -Name extAttrib5 -Value $ADObj.extensionAttribute5
+            Add-Member -InputObject $obj -MemberType NoteProperty -Name extAttrib -Value $ADObj.$extAttrib
             Add-Member -InputObject $obj -MemberType NoteProperty -Name Group -Value $Group.Name
 
             $Table += $Obj
