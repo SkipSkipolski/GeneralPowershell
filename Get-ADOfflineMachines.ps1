@@ -1,4 +1,5 @@
-#This script is NASTY, thrown together in a hurry. Develop if used regularly.
+#Script to get inactive machines in Active Directory and ping to check for a response, confirming it is offline
+
 
 function Get-ADOfflineComp{
     [CmdletBinding()]
@@ -6,9 +7,9 @@ function Get-ADOfflineComp{
         [Parameter(
             Mandatory=$False,
             Position=0,
-            HelpMessage="Enter an OU, default is OU=Servers,DC=paconsulting,DC=com"
+            HelpMessage="Enter an OU, default is OU=Servers,DC=company,DC=com"
         )]
-        [string]$Searchbase = "OU=Servers,DC=paconsulting,DC=com",
+        [string]$Searchbase = "OU=Servers,DC=company,DC=com",
 
         [Parameter(
             Mandatory=$False,
@@ -58,6 +59,6 @@ $ADServers.Name | % {
 $Table | ConvertTo-Csv | Out-file c:\Temp\OfflineAD.csv
 $Attach = Get-Item C:\Temp\OfflineAD.csv
 
-Send-MailMessage -To "alex.glasbey@paconsulting.com" -From "infadm201@paconsulting.com" -Subject "AD Computers - Offline" -SmtpServer "SMTPSERVER" `
+Send-MailMessage -To "admin@company.com" -From "admin@company.com" -Subject "AD Computers - Offline" -SmtpServer "SMTPSERVER" `
 -Body ($Table | ConvertTo-Html -Head $style | Out-String ) -BodyAsHtml -Attachments $Attach
 }

@@ -7,7 +7,7 @@ function Backup-Location {
         $Source,
 
         [Parameter(
-            HelpMessage="Destination for backup. If left empty it will default to C:\Users\camag12\OneDrive - PA Consulting Group\Backup, and create a dated subfolder"
+            HelpMessage="Destination for backup. If left empty it will default to C:\Users\User\Backup, and create a dated subfolder"
         )]
         $Destination
     )
@@ -18,7 +18,7 @@ function Backup-Location {
 
 
     If(!$Destination){
-        $Destination = "C:\Users\camag12\OneDrive - PA Consulting Group\Backup" + "\" + ($Source).Split("\")[-1] + "_" + (Get-Date -F ddMMyy_HHmm)
+        $Destination = $env:userprofile + "\" + ($Source).Split("\")[-1] + "_" + (Get-Date -F ddMMyy_HHmm)
         New-Item -ItemType "Directory" -Path $Destination
     }
 

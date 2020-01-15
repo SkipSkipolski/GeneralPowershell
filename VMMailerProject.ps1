@@ -39,8 +39,7 @@ The process for identifying VM ownership is still in development so apologies in
 
 If you need any more information please let me know.
 
-Many thanks,
-GS - Infrastructure Support."
+Many thanks"
 
     $Grouping = $VMInfo | Group "Contact"
 
@@ -50,7 +49,7 @@ GS - Infrastructure Support."
         $Data = $_.Group | Select VMName, "OTRS_Ref", "Role", "Department", "Contact", "VMRequired" | ConvertTo-Html -Head $Style | Out-File "C:\Temp\ErrVM.htm"
         $HTML = Get-Item "C:\Temp\ErrVM.htm"
 
-        Send-MailMessage -To "alex.glasbey@paconsulting.com" -From "SYSUKInfrastructureSupport@PACONSULTING.COM" -Subject "REQ: VM Ownership - ERROR_NoVMName" -SmtpServer "SMTPSERVER" `
+        Send-MailMessage -To "admin@company.com" -From "ITDepartment@company.com" -Subject "REQ: VM Ownership - ERROR_NoVMName" -SmtpServer "SMTPSERVER" `
         -Body "Attached VMs Missing Owner Annotation - Please Investigate" -Attachments $HTML 
         #Break
     }
@@ -68,10 +67,10 @@ GS - Infrastructure Support."
         $HTML = Get-Item ("C:\Temp\" + $usrSearch + "_" + "VMOwnership" + ".htm")    
 
         If($mailAddr.Mail){
-            Send-MailMessage -To "alex.glasbey@paconsulting.com" -From "SYSUKInfrastructureSupport@PACONSULTING.COM" -Subject "VM Ownership - $(($mailAddr.Mail).Replace("@PACONSULTING.COM",";"))" -SmtpServer "SMTPSERVER" `
+            Send-MailMessage -To "admin@company.com" -From "ITDepartment@company.com" -Subject "VM Ownership - $(($mailAddr.Mail).Replace("@company.com",";"))" -SmtpServer "SMTPSERVER" `
             -Body $Str -Attachments $HTML
         }else{
-            Send-MailMessage -To "alex.glasbey@paconsulting.com" -From "SYSUKInfrastructureSupport@PACONSULTING.COM" -Subject "VM Ownership - ERROR" -SmtpServer "SMTPSERVER" `
+            Send-MailMessage -To "admin@company.com" -From "ITDepartment@company.com" -Subject "VM Ownership - ERROR" -SmtpServer "SMTPSERVER" `
             -Body $Str -Attachments $HTML
         }
     }
@@ -89,7 +88,7 @@ $Grouping.Name | % {
         $Data = $_.Group | Select VMName, "OTRS_Ref", "Role", "Department", "Contact", "VMRequired" | ConvertTo-Html -Head $Style | Out-File "C:\Temp\ErrVM.htm"
         $HTML = Get-Item "C:\Temp\ErrVM.htm"
 
-        Send-MailMessage -To "alex.glasbey@paconsulting.com" -From "SYSUKInfrastructureSupport@PACONSULTING.COM" -Subject "VM Ownership - ERROR_NoVMName" -SmtpServer "SMTPSERVER" `
+        Send-MailMessage -To "admin@company.com" -From "ITDepartment@company.com" -Subject "VM Ownership - ERROR_NoVMName" -SmtpServer "SMTPSERVER" `
         -Body "Attached VMs Missing Owner Annotation - Please Investigate" -Attachments $HTML 
         #Break
     }
@@ -107,10 +106,10 @@ $Grouping.Name | % {
         $HTML = Get-Item ("C:\Temp\" + $usrSearch + "_" + "VMOwnership" + ".htm")    
 
         If($mailAddr.Mail){
-            Send-MailMessage -To "alex.glasbey@paconsulting.com" -From "SYSUKInfrastructureSupport@PACONSULTING.COM" -Subject "REQ: VM Ownership - $(($mailAddr.Mail).Replace("@PACONSULTING.COM",";"))" -SmtpServer "SMTPSERVER" `
+            Send-MailMessage -To "admin@company.com" -From "ITDepartment@company.com" -Subject "REQ: VM Ownership - $(($mailAddr.Mail).Replace("@PACONSULTING.COM",";"))" -SmtpServer "SMTPSERVER" `
             -Body $Str -Attachments $HTML
         }else{
-            Send-MailMessage -To "alex.glasbey@paconsulting.com" -From "SYSUKInfrastructureSupport@PACONSULTING.COM" -Subject "REQ: VM Ownership - ERROR" -SmtpServer "SMTPSERVER" `
+            Send-MailMessage -To "admin@company.com" -From "ITDepartment@company.com" -Subject "REQ: VM Ownership - ERROR" -SmtpServer "SMTPSERVER" `
             -Body $Str -Attachments $HTML
         }
     }

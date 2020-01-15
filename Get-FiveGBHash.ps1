@@ -1,11 +1,13 @@
-﻿Function Get-DiskSpace{
-    $Servers = Get-ADComputer -SearchBase "OU=Servers,DC=padev,DC=dev" -filter *
+﻿#Get all servers with less than 5GB space as a hash table
+
+Function Get-DiskSpace{
+    $Servers = Get-ADComputer -SearchBase "OU=Servers,DC=pcompany,DC=com" -filter *
     $PSCred = (Get-Credential)
     $ErrorActionPreference = "Stop"
     $logFile = c:\Temp\fails.log
     $table = @();
 
-    $Servers.name[0..10] | ForEach{
+    $Servers.name | ForEach{
             try 
             {
                 Invoke-Command -computername $_ -Credential $PSCred -Scriptblock

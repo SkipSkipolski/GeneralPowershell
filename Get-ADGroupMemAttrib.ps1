@@ -1,5 +1,7 @@
 Function Get-ADGroupMemAttrib {
 
+#Function to return the attribute number of all members of a particular group
+
     Param(
         [Parameter(Position=0,
         Mandatory=$True,

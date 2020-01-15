@@ -1,10 +1,13 @@
+#Script takes VM's from a hypervisor and compares if there is an equivelant VM in each domain if the VM's follow a naming convention.
+#E.g. Confirms if there is a CAMEXC001, a TSTEXC001 and a DEVEXC001.
+
 $style = "<style>BODY{font-family: Arial; font-size: 10pt;}"
 $style = $style + "TABLE{border: 1px solid black; border-collapse: collapse;}"
 $style = $style + "TH{border: 1px solid black; background: #00AEFF; padding: 5px; }"
 $style = $style + "TD{border: 1px solid black; padding: 5px; }"
 $style = $style + "</style>"
 
-$VM += Get-VM
+$VM = Get-VM
 $DomGroup = $VM | Group-Object -Property {$_.Name.SubString(0,3)} | Where {$_.Name -eq "TST" -or $_.Name -eq "DEV" -or $_.Name -eq "CAM"}
 
 $DomGroup.Name[0]| % {

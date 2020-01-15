@@ -1,6 +1,8 @@
-﻿Function Get-DiskSpace 
+﻿#Get all servers with less than 5GB space as an object
+
+Function Get-DiskSpace 
 {
-    $Servers = Get-ADComputer -SearchBase "OU=Servers,DC=padev,DC=dev" -filter *
+    $Servers = Get-ADComputer -SearchBase "OU=Servers,DC=company,DC=com" -filter *
     $PSCred = (Get-Credential)
     $ErrorActionPreference = "Stop"
     $logFile = "c:\Temp\fails.log"

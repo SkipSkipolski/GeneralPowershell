@@ -1,3 +1,5 @@
+#Script to get all DL's not used in a set time.
+
 #Setting Static Varibles
 $LogFile = C:\Temp\Get-PADLStats.ps1
 

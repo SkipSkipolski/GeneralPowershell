@@ -1,4 +1,4 @@
-﻿asnp Citrix*
+﻿Add-Snapin Citrix*
 
 $style = "<style>BODY{font-family: Arial; font-size: 10pt;}"
 $style = $style + "TABLE{border: 1px solid black; border-collapse: collapse;}"

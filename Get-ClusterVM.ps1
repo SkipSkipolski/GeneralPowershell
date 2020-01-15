@@ -1,3 +1,5 @@
+#List all VM's on a server and their annotations
+
 $VIServer = Connect-VIServer
 
 Function Get-VMAnnotation{
